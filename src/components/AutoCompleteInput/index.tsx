@@ -1,6 +1,8 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React, {useEffect} from 'react';
+import {useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {theme} from '../../global/theme';
+import {IconItem} from '../Icon';
 
 import {
   AutoComplete,
@@ -9,34 +11,60 @@ import {
   SampleIcon,
 } from './styles';
 
-const AutoCompleteInput: React.FC = () => {
-  const data = [
-    {
-      name: 'Rafael Lessa',
-    },
-    {
-      name: 'Savana',
-    },
-  ];
+interface DataProps {
+  name: string;
+}
+export interface RenderItem {
+  item: DataProps;
+  index: number;
+}
 
+interface AutoCompleteProps {
+  data: DataProps[];
+  defaultValue: string | undefined;
+  onChangeText: (t: string) => void;
+  keyExtractor: (t: DataProps) => string;
+  renderItem: ({}: RenderItem) => JSX.Element;
+  hideResults: boolean;
+  placeholder?: string | undefined;
+  placeholderTextColor: string;
+  keyboardShouldPersistTaps:
+    | boolean
+    | 'always'
+    | 'handeld'
+    | 'never'
+    | undefined;
+  icon?: IconItem;
+}
+
+const AutoCompleteInput: React.FC<AutoCompleteProps> = ({
+  data,
+  defaultValue,
+  onChangeText,
+  keyExtractor,
+  renderItem,
+  hideResults,
+  placeholder,
+  placeholderTextColor,
+  keyboardShouldPersistTaps,
+  icon,
+}) => {
   return (
     <Container>
       <AutoCompleteContainer>
-        <SampleIcon name="building" />
+        {icon && <SampleIcon name="building" />}
         <AutoComplete
           data={data}
-          onChangeText={(text: string) => {
-            if (text.length >= 3) {
-            }
-          }}
+          defaultValue={defaultValue}
+          onChangeText={onChangeText}
           flatListProps={{
-            keyExtractor: (_, idx) => idx,
-            renderItem: ({item}) => <Text>{item.name}</Text>,
+            keyExtractor: keyExtractor,
+            renderItem: renderItem,
           }}
-          hideResults={true}
-          placeholder="Administradora"
-          placeholderTextColor={theme.colors.primary}
-          keyboardShouldPersistTaps="always"
+          hideResults={hideResults}
+          placeholder={placeholder}
+          placeholderTextColor={placeholderTextColor}
+          keyboardShouldPersistTaps={keyboardShouldPersistTaps}
         />
       </AutoCompleteContainer>
     </Container>
