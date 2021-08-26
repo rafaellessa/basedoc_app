@@ -1,7 +1,6 @@
 import {theme} from './../../global/theme';
 import styled from 'styled-components/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
+import Icon, {IconItem} from '../../components/Icon';
 interface StyledProps {
   hidden: boolean;
 }
@@ -58,6 +57,9 @@ export const SampleInput = styled.TextInput`
 
 export const IconContainer = styled.TouchableOpacity``;
 
-export const SampleIcon = styled(Icon)`
-  font-size: 20px;
-`;
+export const SampleIcon = styled(Icon).attrs(({name, color}: IconItem) => ({
+  source: 'FontAwesome',
+  name,
+  size: 20,
+  color: color,
+}))``;
