@@ -1,18 +1,12 @@
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import {Text, View} from 'react-native';
-
-// import { Container } from './styles';
+import Stack from './src/navigations/Stack';
 
 const App: React.FC = () => {
   return (
-    <Text
-      style={{
-        margin: 100,
-        fontFamily: 'PTSans-Regular',
-        fontSize: 24,
-      }}>
-      Olá Amigo
-    </Text>
+    <NavigationContainer>
+      <Stack />
+    </NavigationContainer>
   );
 };
 
