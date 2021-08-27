@@ -7,7 +7,7 @@ export const Container = styled.TouchableOpacity`
   border-bottom-width: 1px;
   border-bottom-color: ${theme.colors.secondary};
   border-radius: 10px;
-  background-color: red;
+  background-color: transparent;
 `;
 
 export const ItemTitle = styled.Text`

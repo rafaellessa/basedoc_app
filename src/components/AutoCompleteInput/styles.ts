@@ -4,7 +4,14 @@ import AutoCompleteInput from 'react-native-autocomplete-input';
 import {Platform} from 'react-native';
 import Icon, {IconItem} from '../../components/Icon';
 
-export const Container = styled.View``;
+export const Container = styled.View`
+  flex: 1;
+`;
+
+export const SafeContainer = styled.View`
+  flex-direction: row;
+  flex: 1;
+`;
 
 export const AutoCompleteContainer = styled.View`
   flex-direction: row;
@@ -23,6 +30,7 @@ export const AutoCompleteContainer = styled.View`
 export const AutoComplete = styled(AutoCompleteInput).attrs({
   inputContainerStyle: {
     borderWidth: 0,
+    left: 30,
   },
 })`
   font-family: ${theme.fonts.regular};
@@ -36,4 +44,7 @@ export const SampleIcon = styled(Icon).attrs(({name, color}: IconItem) => ({
   name,
   size: 20,
   color: color,
-}))``;
+}))`
+  margin-top: 12px;
+  margin-left: 10px;
+`;

@@ -4,6 +4,7 @@ import {
   AutoComplete,
   AutoCompleteContainer,
   Container,
+  SafeContainer,
   SampleIcon,
 } from './styles';
 
@@ -47,22 +48,25 @@ const AutoCompleteInput: React.FC<AutoCompleteProps> = ({
 }) => {
   return (
     <Container>
-      <AutoCompleteContainer>
+      <SafeContainer>
         {icon && <SampleIcon name="building" />}
-        <AutoComplete
-          data={data}
-          defaultValue={defaultValue}
-          onChangeText={onChangeText}
-          flatListProps={{
-            keyExtractor: keyExtractor,
-            renderItem: renderItem,
-          }}
-          hideResults={hideResults}
-          placeholder={placeholder}
-          placeholderTextColor={placeholderTextColor}
-          keyboardShouldPersistTaps={keyboardShouldPersistTaps}
-        />
-      </AutoCompleteContainer>
+        {/* <SampleIcon name="building" /> */}
+        <AutoCompleteContainer>
+          <AutoComplete
+            data={data}
+            defaultValue={defaultValue}
+            onChangeText={onChangeText}
+            flatListProps={{
+              keyExtractor: keyExtractor,
+              renderItem: renderItem,
+            }}
+            hideResults={hideResults}
+            placeholder={placeholder}
+            placeholderTextColor={placeholderTextColor}
+            keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+          />
+        </AutoCompleteContainer>
+      </SafeContainer>
     </Container>
   );
 };
