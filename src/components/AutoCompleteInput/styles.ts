@@ -32,11 +32,14 @@ export const AutoComplete = styled(AutoCompleteInput).attrs({
     borderWidth: 0,
     left: 30,
   },
+  listContainerStyle: {
+    top: `${Platform.OS === 'android'}` ? 20 : 10,
+  },
+  listStyle: {},
 })`
   font-family: ${theme.fonts.regular};
   font-size: 18px;
   flex: 1;
-  width: 250px;
 `;
 
 export const SampleIcon = styled(Icon).attrs(({name, color}: IconItem) => ({
