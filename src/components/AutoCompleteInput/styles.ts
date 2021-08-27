@@ -12,19 +12,31 @@ export const AutoCompleteContainer = styled.View`
   border-bottom-width: 1px;
   border-bottom-color: ${theme.colors.secondary};
   padding: 10px;
-  height: 40px;
+  flex: 1;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 9999;
 `;
 
 export const AutoComplete = styled(AutoCompleteInput).attrs({
   inputContainerStyle: {
     borderWidth: 0,
-    height: 50,
-    borderRadius: 10,
-    padding: `${Platform.OS == 'ios'}` ? 10 : 0,
   },
   listContainerStyle: {
-    backgroundColor: '#333',
+    // position: 'absolute',
+    // top: 50,
+    // //marginTop: `${Platform.OS === 'ios'}` ? 10 : 0,
+    // width: 300,
+    // backgroundColor: 'lime',
   },
+  containerStyle: {
+    // height: 40,
+    // marginTop: -20,
+    // justifyContent: 'flex-start',
+  },
+  listStyle: {},
 })`
   font-family: ${theme.fonts.regular};
   font-size: 18px;

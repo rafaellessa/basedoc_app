@@ -1,3 +1,4 @@
+import {Platform} from 'react-native';
 import {theme} from './../../global/theme';
 import styled from 'styled-components/native';
 import Icon, {IconItem} from '../../components/Icon';
@@ -37,10 +38,14 @@ export const FormContainer = styled.View`
   flex: 2;
 `;
 
+export const SafeContainer = styled.View`
+  flex: 1;
+`;
+
 export const InputContainer = styled.View`
   flex-direction: row;
   padding: 10px;
-  height: 40px;
+  height: ${Platform.OS === 'android' ? 60 + 'px' : 40 + 'px'};
   align-items: center;
   justify-content: space-between;
   border-bottom-width: 1px;

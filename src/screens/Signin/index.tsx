@@ -10,6 +10,7 @@ import {
   InputContainer,
   LogoBaseDoc,
   LogoContainer,
+  SafeContainer,
   SampleIcon,
   SampleInput,
   Title,
@@ -112,24 +113,26 @@ const Signin: React.FC = () => {
             <SampleIcon name={hidden ? 'eye' : 'eye-slash'} />
           </IconContainer>
         </InputContainer>
-        <AutoComplete
-          data={filteredAdministrators}
-          defaultValue={administrator?.name}
-          onChangeText={(text: string) => {
-            setQuery(text);
-          }}
-          keyExtractor={item => String(item.name)}
-          renderItem={renderItem}
-          hideResults={hideResults}
-          placeholder="Administradora"
-          placeholderTextColor={theme.colors.secondary100}
-          keyboardShouldPersistTaps="always"
-          icon={{
-            name: 'building',
-            source: 'FontAwesome',
-            size: 20,
-          }}
-        />
+        <SafeContainer>
+          <AutoComplete
+            data={filteredAdministrators}
+            defaultValue={administrator?.name}
+            onChangeText={(text: string) => {
+              setQuery(text);
+            }}
+            keyExtractor={item => String(item.name)}
+            renderItem={renderItem}
+            hideResults={hideResults}
+            placeholder="Administradora"
+            placeholderTextColor={theme.colors.secondary100}
+            keyboardShouldPersistTaps="always"
+            icon={{
+              name: 'building',
+              source: 'FontAwesome',
+              size: 20,
+            }}
+          />
+        </SafeContainer>
       </FormContainer>
     </Container>
   );

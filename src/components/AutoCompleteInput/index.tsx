@@ -1,9 +1,5 @@
-import React, {useEffect} from 'react';
-import {useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import {theme} from '../../global/theme';
+import React from 'react';
 import {IconItem} from '../Icon';
-
 import {
   AutoComplete,
   AutoCompleteContainer,
