@@ -11,7 +11,7 @@ export const AutoCompleteContainer = styled.View`
   align-items: center;
   border-bottom-width: 1px;
   border-bottom-color: ${theme.colors.secondary};
-  padding: 10px;
+  padding: ${Platform.OS === 'android' ? 0 + 'px' : 10 + 'px'};
   flex: 1;
   left: 0;
   position: absolute;
@@ -24,19 +24,6 @@ export const AutoComplete = styled(AutoCompleteInput).attrs({
   inputContainerStyle: {
     borderWidth: 0,
   },
-  listContainerStyle: {
-    // position: 'absolute',
-    // top: 50,
-    // //marginTop: `${Platform.OS === 'ios'}` ? 10 : 0,
-    // width: 300,
-    // backgroundColor: 'lime',
-  },
-  containerStyle: {
-    // height: 40,
-    // marginTop: -20,
-    // justifyContent: 'flex-start',
-  },
-  listStyle: {},
 })`
   font-family: ${theme.fonts.regular};
   font-size: 18px;
