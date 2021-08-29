@@ -4,6 +4,7 @@ import {AdministratorActions} from '../../../redux/reducers/reducer.administrato
 import {getAdministrators} from '../../../redux/selectors/selector.administrators';
 import {Administrator} from '../../../redux/types/types.administrators';
 import {
+  AdministratorSelectTitle,
   ButtonContainer,
   ButtonTitle,
   Container,
@@ -103,14 +104,9 @@ const Login: React.FC = () => {
             <SampleIcon name="building" />
             <SelectAdministratorContainer
               onPress={() => setVisibleModal(!visibleModal)}>
-              <SampleInput
-                placeholder="Administradora"
-                secureTextEntry={hidden}
-                value={administrator?.name}
-                onChangeText={setPassword}
-                placeholderTextColor={theme.colors.secondary100}
-                editable={false}
-              />
+              <AdministratorSelectTitle>
+                Administradora
+              </AdministratorSelectTitle>
             </SelectAdministratorContainer>
             <IconContainer
               onPress={() => setAdministrator({} as Administrator)}>

@@ -17,6 +17,7 @@ export const LogoContainer = styled.View`
   justify-content: center;
   align-items: center;
   height: 200px;
+  margin-top: 60px;
 `;
 
 export const LogoBaseDoc = styled.Image.attrs({
@@ -77,16 +78,31 @@ export const FooterContainer = styled.View`
 `;
 
 export const ButtonContainer = styled.TouchableOpacity`
-  padding: 20px;
+  padding: 10px;
   background-color: ${theme.colors.primary};
   flex-direction: row;
   width: 100%;
+  height: 50px;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
 `;
 
-export const ButtonTitle = styled.Text``;
+export const ButtonTitle = styled.Text`
+  font-family: ${theme.fonts.regular};
+  font-size: 18px;
+  color: ${theme.colors.white};
+`;
 
 export const SelectAdministratorContainer = styled.TouchableOpacity`
   flex: 1;
+  height: 30px;
+  justify-content: center;
+  padding-left: 10px;
+`;
+
+export const AdministratorSelectTitle = styled.Text`
+  font-family: ${theme.fonts.regular};
+  font-size: 18px;
+  color: ${theme.colors.secondary100};
 `;
