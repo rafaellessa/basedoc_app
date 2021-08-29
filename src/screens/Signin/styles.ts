@@ -6,9 +6,7 @@ interface StyledProps {
   hidden: boolean;
 }
 
-export const Container = styled.KeyboardAvoidingView.attrs({
-  behavior: `${Platform.OS === 'ios' ? 'padding' : 'height'}`,
-})`
+export const Container = styled.View`
   flex: 1;
   margin-horizontal: 30px;
 `;
