@@ -1,7 +1,7 @@
-import {createStore, combineReducers, compose, applyMiddleware} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import redux from '..';
 import ReactotronConfig from '../../../ReactoTron';
-import {reducer as reducerAdministrator} from '../reducers/reducer.administrators';
 import rootSaga from './../sagas/sagas.administrators';
 
 const sagaMonitor = ReactotronConfig.createSagaMonitor?.();
@@ -14,12 +14,7 @@ const composer = compose(
   ReactotronConfig.createEnhancer(),
 );
 
-const store = createStore(
-  combineReducers({
-    reducerAdministrator,
-  }),
-  composer,
-);
+const store = createStore(redux.reducer, composer);
 
 sagaMiddleware.run(rootSaga);
 

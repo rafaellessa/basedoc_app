@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import Logo from '../../assets/logo.png';
 import AutoComplete from '../../components/AutoCompleteInput';
 import AutoCompleteItem from '../../components/AutoCompleteItem';
+import AdministratorService from '../../data/services/administrator';
 import {theme} from '../../global/theme';
+import {AdministratorActions} from '../../redux/reducers/reducer.administrators';
+import {getAdministrators} from '../../redux/selectors/selector.administrators';
 import {
   Container,
   FormContainer,
@@ -52,13 +56,24 @@ const Signin: React.FC = () => {
     DataProps[]
   >([]);
   const [query, setQuery] = useState('');
+  const dispatch = useDispatch();
+  const adm = useSelector(getAdministrators);
+
+  useEffect(() => {
+    fetchAdministrators();
+    console.tron.log('Admmmmm:> ', adm);
+  }, []);
+
+  const fetchAdministrators = async () => {
+    dispatch(AdministratorActions.basedocRequestGetAllAdministrators());
+  };
 
   const handleSearch = (text: string) => {
     const filtered = data.filter(item =>
       item.name.match(new RegExp(text, 'i')),
     );
 
-    console.log('Filtereds', filtered);
+    console.tron.log('Filtereds', filtered);
     setFilteredAdministrators(filtered);
   };
 
