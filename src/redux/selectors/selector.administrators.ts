@@ -2,7 +2,7 @@ import {Administrator} from './../types/types.administrators';
 import {BaseDocReducers, BasedocStateRoot} from './../types/types.redux';
 
 export const getAdministrators = (state: BasedocStateRoot): Administrator[] => {
-  return state[BaseDocReducers.root][BaseDocReducers.administrators];
+  return state[BaseDocReducers.administrators][BaseDocReducers.administrators];
 };
 
 export const getAdministratorsMetadata = (

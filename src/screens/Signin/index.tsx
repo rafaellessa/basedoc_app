@@ -4,6 +4,7 @@ import Logo from '../../assets/logo.png';
 import Modal from '../../components/Modal';
 import {theme} from '../../global/theme';
 import {AdministratorActions} from '../../redux/reducers/reducer.administrators';
+import {AuthActions} from '../../redux/reducers/reducer.auth';
 import {getAdministrators} from '../../redux/selectors/selector.administrators';
 import {Administrator} from '../../redux/types/types.administrators';
 import {
@@ -62,6 +63,16 @@ const Signin: React.FC = () => {
 
   const fetchAdministrators = async () => {
     dispatch(AdministratorActions.basedocRequestGetAllAdministrators());
+  };
+
+  const dispatchLogin = async () => {
+    dispatch(
+      AuthActions.basedocRequestLogin({
+        login,
+        password,
+        partner: administrator!.uuid,
+      }),
+    );
   };
 
   const handleSearch = (text: string) => {
@@ -138,7 +149,7 @@ const Signin: React.FC = () => {
             <SampleIcon name="close" />
           </IconContainer>
         </InputContainer>
-        <ButtonContainer>
+        <ButtonContainer onPress={dispatchLogin}>
           <ButtonTitle>Login</ButtonTitle>
         </ButtonContainer>
         <FooterContainer />
