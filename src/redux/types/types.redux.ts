@@ -1,5 +1,5 @@
-import {AdministratorState} from './types.administrators';
 import {ImmutableObject} from 'seamless-immutable';
+import {AdministratorState} from './types.administrators';
 
 export enum BaseDocReducers {
   root = 'reducerBaseDoc',
