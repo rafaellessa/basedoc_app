@@ -17,7 +17,7 @@ export const LogoContainer = styled.View`
   justify-content: center;
   align-items: center;
   height: 200px;
-  margin-top: 60px;
+  margin-top: ${Platform.OS === 'android' ? 10 + 'px' : 60 + 'px'};
 `;
 
 export const LogoBaseDoc = styled.Image.attrs({
@@ -47,8 +47,8 @@ export const SafeContainer = styled.View`
 
 export const InputContainer = styled.View`
   flex-direction: row;
-  padding: 10px;
-  height: ${Platform.OS === 'android' ? 60 + 'px' : 40 + 'px'};
+  padding: 0px 10px;
+  height: ${Platform.OS === 'android' ? 40 + 'px' : 40 + 'px'};
   align-items: center;
   justify-content: space-between;
   border-bottom-width: 1px;
