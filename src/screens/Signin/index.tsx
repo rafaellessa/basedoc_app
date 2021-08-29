@@ -7,7 +7,10 @@ import {theme} from '../../global/theme';
 import {AdministratorActions} from '../../redux/reducers/reducer.administrators';
 import {getAdministrators} from '../../redux/selectors/selector.administrators';
 import {
+  ButtonContainer,
+  ButtonTitle,
   Container,
+  FooterContainer,
   FormContainer,
   IconContainer,
   InputContainer,
@@ -56,11 +59,10 @@ const Signin: React.FC = () => {
   >([]);
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
-  const adm = useSelector(getAdministrators);
+  const administrators = useSelector(getAdministrators);
 
   useEffect(() => {
     fetchAdministrators();
-    console.tron.log('Admmmmm:> ', adm);
   }, []);
 
   const fetchAdministrators = async () => {
@@ -68,7 +70,7 @@ const Signin: React.FC = () => {
   };
 
   const handleSearch = (text: string) => {
-    const filtered = data.filter(item =>
+    const filtered = administrators.filter(item =>
       item.name.match(new RegExp(text, 'i')),
     );
 
@@ -79,7 +81,7 @@ const Signin: React.FC = () => {
   useEffect(() => {
     if (query.length >= 3) {
       handleSearch(query);
-    } else {
+    } else if (query === '') {
       setFilteredAdministrators([]);
       setHideResults(false);
       setAdministrator({} as DataProps);
@@ -147,6 +149,10 @@ const Signin: React.FC = () => {
             }}
           />
         </SafeContainer>
+        <ButtonContainer>
+          <ButtonTitle>Login</ButtonTitle>
+        </ButtonContainer>
+        <FooterContainer />
       </FormContainer>
     </Container>
   );

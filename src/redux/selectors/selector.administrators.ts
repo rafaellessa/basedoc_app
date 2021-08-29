@@ -2,14 +2,15 @@ import {Administrator} from './../types/types.administrators';
 import {BaseDocReducers, BasedocStateRoot} from './../types/types.redux';
 
 export const getAdministrators = (state: BasedocStateRoot): Administrator[] => {
-  return state[BaseDocReducers];
+  return state[BaseDocReducers.root][BaseDocReducers.administrators];
 };
 
 export const getAdministratorsMetadata = (
   state: BasedocStateRoot,
 ): {loading: boolean; error?: string | null} => {
   return {
-    loading: state[BaseDocReducers.root].loading,
-    error: state[BaseDocReducers.root].error,
+    loading:
+      state[BaseDocReducers.root][BaseDocReducers.administrators].loading,
+    error: state[BaseDocReducers.root][BaseDocReducers.administrators].error,
   };
 };

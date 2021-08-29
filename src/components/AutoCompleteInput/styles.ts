@@ -1,8 +1,15 @@
 import {theme} from './../../global/theme';
 import styled from 'styled-components/native';
 import AutoCompleteInput from 'react-native-autocomplete-input';
-import {Platform} from 'react-native';
+import {Dimensions, PixelRatio, Platform} from 'react-native';
 import Icon, {IconItem} from '../../components/Icon';
+
+const widthPercentageToDP = widthPercent => {
+  const screenWidth = Dimensions.get('window').width;
+  return PixelRatio.roundToNearestPixel(
+    (screenWidth * parseFloat(widthPercent)) / 100,
+  );
+};
 
 export const Container = styled.View`
   flex: 1;
@@ -31,9 +38,10 @@ export const AutoComplete = styled(AutoCompleteInput).attrs({
   inputContainerStyle: {
     borderWidth: 0,
     left: 30,
+    maxWidth: 300,
   },
   listContainerStyle: {
-    top: `${Platform.OS === 'android'}` ? 20 : 10,
+    top: 10,
   },
   containerStyle: {
     flex: 1,

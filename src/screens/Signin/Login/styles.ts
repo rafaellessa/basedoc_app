@@ -1,7 +1,7 @@
 import {Platform} from 'react-native';
-import {theme} from './../../global/theme';
+import {theme} from '../../../global/theme';
 import styled from 'styled-components/native';
-import Icon, {IconItem} from '../../components/Icon';
+import Icon, {IconItem} from '../../../components/Icon';
 interface StyledProps {
   hidden: boolean;
 }
@@ -86,3 +86,7 @@ export const ButtonContainer = styled.TouchableOpacity`
 `;
 
 export const ButtonTitle = styled.Text``;
+
+export const SelectAdministratorContainer = styled.TouchableOpacity`
+  flex: 1;
+`;
