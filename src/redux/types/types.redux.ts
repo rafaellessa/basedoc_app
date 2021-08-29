@@ -3,7 +3,7 @@ import {ImmutableObject} from 'seamless-immutable';
 import {AdministratorState} from './types.administrators';
 
 export enum BaseDocReducers {
-  root = 'basedoc',
+  root = 'value',
   administrators = 'administrators',
   auth = 'auth',
 }

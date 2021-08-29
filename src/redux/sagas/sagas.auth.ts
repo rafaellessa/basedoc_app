@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import AuthService from '../../data/services/auth';
 import {AuthActions, AuthTypes} from './../reducers/reducer.auth';
@@ -12,7 +13,11 @@ function* makeLogin(action: BasedocRequestLogin) {
     });
 
     yield put(AuthActions.basedocSuccessLogin(response));
-  } catch (error) {}
+
+    yield AsyncStorage.setItem('token', response.token!);
+  } catch (error) {
+    yield put(AuthActions.basedocFailureLogin(error.message));
+  }
 }
 
 export default function* root() {

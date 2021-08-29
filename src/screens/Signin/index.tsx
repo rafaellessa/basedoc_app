@@ -1,11 +1,15 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
+import {ActivityIndicator} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Logo from '../../assets/logo.png';
+import Loading from '../../components/Loading';
 import Modal from '../../components/Modal';
 import {theme} from '../../global/theme';
 import {AdministratorActions} from '../../redux/reducers/reducer.administrators';
 import {AuthActions} from '../../redux/reducers/reducer.auth';
 import {getAdministrators} from '../../redux/selectors/selector.administrators';
+import {getAuthMetadata, getUser} from '../../redux/selectors/selector.auth';
 import {Administrator} from '../../redux/types/types.administrators';
 import {
   AdministratorSelectTitle,
@@ -56,10 +60,21 @@ const Signin: React.FC = () => {
 
   const dispatch = useDispatch();
   const administrators = useSelector(getAdministrators);
+  const {loading, error} = useSelector(getAuthMetadata);
+  const user = useSelector(getUser);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     fetchAdministrators();
   }, []);
+
+  useEffect(() => {
+    console.tron.log('Mudou o user: ', user);
+    if (user) {
+      navigation.navigate('Files');
+    }
+  }, [user]);
 
   const fetchAdministrators = async () => {
     dispatch(AdministratorActions.basedocRequestGetAllAdministrators());
@@ -106,7 +121,9 @@ const Signin: React.FC = () => {
     </ListItem>
   );
 
-  return (
+  const renderLoading = () => <Loading />;
+
+  const renderContent = () => (
     <Container>
       <LogoContainer>
         <LogoBaseDoc source={Logo} />
@@ -194,6 +211,16 @@ const Signin: React.FC = () => {
       </Modal>
     </Container>
   );
+
+  const validateRender = () => {
+    if (loading) {
+      return renderLoading();
+    } else {
+      return renderContent();
+    }
+  };
+
+  return validateRender();
 };
 
 export default Signin;
