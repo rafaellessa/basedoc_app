@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import Logo from '../../assets/logo.png';
 import AutoComplete from '../../components/AutoCompleteInput';
 import AutoCompleteItem from '../../components/AutoCompleteItem';
-import AdministratorService from '../../data/services/administrator';
 import {theme} from '../../global/theme';
 import {AdministratorActions} from '../../redux/reducers/reducer.administrators';
 import {getAdministrators} from '../../redux/selectors/selector.administrators';

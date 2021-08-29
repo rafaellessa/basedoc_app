@@ -35,7 +35,9 @@ export const AutoComplete = styled(AutoCompleteInput).attrs({
   listContainerStyle: {
     top: `${Platform.OS === 'android'}` ? 20 : 10,
   },
-  listStyle: {},
+  containerStyle: {
+    flex: 1,
+  },
 })`
   font-family: ${theme.fonts.regular};
   font-size: 18px;
