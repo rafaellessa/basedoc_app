@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Logo from '../../assets/logo.png';
-import AutoCompleteItem from '../../components/AutoCompleteItem';
 import Modal from '../../components/Modal';
 import {theme} from '../../global/theme';
 import {AdministratorActions} from '../../redux/reducers/reducer.administrators';
@@ -45,7 +44,6 @@ interface DataProps {
 
 const Signin: React.FC = () => {
   const [hidden, setHidden] = useState(true);
-  const [hideResults, setHideResults] = useState(false);
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [administrator, setAdministrator] = useState<Administrator>();
@@ -61,10 +59,6 @@ const Signin: React.FC = () => {
   useEffect(() => {
     fetchAdministrators();
   }, []);
-
-  useEffect(() => {
-    console.tron.log('administrator selected: ', administrator);
-  }, [administrator]);
 
   const fetchAdministrators = async () => {
     dispatch(AdministratorActions.basedocRequestGetAllAdministrators());
@@ -181,7 +175,7 @@ const Signin: React.FC = () => {
             />
           </ModalListContainer>
           <ModalFooterContainer>
-            <CloseButton onPress={() => setVisibleModal(false)}>
+            <CloseButton onPress={() => handleResetQuery()}>
               <CloseButtonTitle>Fechar</CloseButtonTitle>
             </CloseButton>
           </ModalFooterContainer>
