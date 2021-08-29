@@ -8,9 +8,9 @@ export interface Administrator {
 }
 
 export interface AdministratorActionTypes {
-  BASEDOC_REQUEST_GET_ALL_ADDMINISTRATORS: string;
-  BASEDOC_SUCCESS_GET_ALL_ADDMINISTRATORS: string;
-  BASEDOC_FAILURE_GET_ALL_ADDMINISTRATORS: string;
+  BASEDOC_REQUEST_GET_ALL_ADMINISTRATORS: string;
+  BASEDOC_SUCCESS_GET_ALL_ADMINISTRATORS: string;
+  BASEDOC_FAILURE_GET_ALL_ADMINISTRATORS: string;
 
   RESET: string;
 }
@@ -36,7 +36,7 @@ export interface BasedocFailureGetAllAdministrators
   error: string | null;
 }
 
-export interface CreatorTtypes {
+export interface CreatorTypes {
   basedocRequestGetAllAdministrators(): BasedocRequestGetAllAdministrators;
   basedocSuccessGetAllAdministrators(
     administrators: Administrator[],

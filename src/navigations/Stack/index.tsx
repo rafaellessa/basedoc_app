@@ -1,7 +1,7 @@
-import React, {FunctionComponent} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Splash from '../../screens/Splash';
+import React, {FunctionComponent} from 'react';
 import Signin from '../../screens/Signin';
+import Splash from '../../screens/Splash';
 
 interface RootRouteScreens {
   name: string;
