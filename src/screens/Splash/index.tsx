@@ -8,7 +8,7 @@ import Logo from '../../assets/logo.png';
 const Splash: React.FC = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Login', {});
+      navigation.navigate('Signin', {});
     }, 3000);
   }, []);
 

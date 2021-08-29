@@ -1,24 +1,40 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import Logo from '../../assets/logo.png';
-import AutoComplete from '../../components/AutoCompleteInput';
 import AutoCompleteItem from '../../components/AutoCompleteItem';
+import Modal from '../../components/Modal';
 import {theme} from '../../global/theme';
 import {AdministratorActions} from '../../redux/reducers/reducer.administrators';
 import {getAdministrators} from '../../redux/selectors/selector.administrators';
+import {Administrator} from '../../redux/types/types.administrators';
 import {
+  AdministratorSelectTitle,
   ButtonContainer,
   ButtonTitle,
+  CloseButton,
+  CloseButtonTitle,
   Container,
+  EnvironmentList,
   FooterContainer,
   FormContainer,
   IconContainer,
   InputContainer,
+  ListItem,
+  ListItemTitle,
   LogoBaseDoc,
   LogoContainer,
-  SafeContainer,
+  ModalContent,
+  ModalFooterContainer,
+  ModalHeaderContainer,
+  ModalHeaderTitle,
+  ModalListContainer,
+  ModalOverlay,
+  ModalOverlayContainer,
   SampleIcon,
   SampleInput,
+  SearchInput,
+  SearchInputClearIcon,
+  SelectAdministratorContainer,
   Title,
   TitleContainer,
 } from './styles';
@@ -27,43 +43,28 @@ interface DataProps {
   name: string;
 }
 
-const data = [
-  {
-    name: 'Rafael Lessa',
-  },
-  {
-    name: 'Rafaela Lessa',
-  },
-  {
-    name: 'Savana',
-  },
-  {
-    name: 'Sophia',
-  },
-  {
-    name: 'Robson Lessa',
-  },
-  {
-    name: 'Rudson Lessa',
-  },
-];
-
 const Signin: React.FC = () => {
   const [hidden, setHidden] = useState(true);
   const [hideResults, setHideResults] = useState(false);
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const [administrator, setAdministrator] = useState<DataProps>();
+  const [administrator, setAdministrator] = useState<Administrator>();
   const [filteredAdministrators, setFilteredAdministrators] = useState<
     DataProps[]
   >([]);
   const [query, setQuery] = useState('');
+  const [visibleModal, setVisibleModal] = useState(false);
+
   const dispatch = useDispatch();
   const administrators = useSelector(getAdministrators);
 
   useEffect(() => {
     fetchAdministrators();
   }, []);
+
+  useEffect(() => {
+    console.tron.log('administrator selected: ', administrator);
+  }, [administrator]);
 
   const fetchAdministrators = async () => {
     dispatch(AdministratorActions.basedocRequestGetAllAdministrators());
@@ -74,7 +75,6 @@ const Signin: React.FC = () => {
       item.name.match(new RegExp(text, 'i')),
     );
 
-    console.tron.log('Filtereds', filtered);
     setFilteredAdministrators(filtered);
   };
 
@@ -83,19 +83,22 @@ const Signin: React.FC = () => {
       handleSearch(query);
     } else if (query === '') {
       setFilteredAdministrators([]);
-      setHideResults(false);
-      setAdministrator({} as DataProps);
     }
   }, [query]);
 
-  const renderItem = ({item}: {item: DataProps}) => (
-    <AutoCompleteItem
-      title={item.name}
-      onItemPress={() => {
+  const handleResetQuery = () => {
+    setQuery('');
+    setVisibleModal(false);
+  };
+
+  const renderItem = ({item}: {item: Administrator}) => (
+    <ListItem
+      onPress={() => {
         setAdministrator(item);
-        setHideResults(true);
-      }}
-    />
+        handleResetQuery();
+      }}>
+      <ListItemTitle>{item.name}</ListItemTitle>
+    </ListItem>
   );
 
   return (
@@ -129,31 +132,61 @@ const Signin: React.FC = () => {
             <SampleIcon name={hidden ? 'eye' : 'eye-slash'} />
           </IconContainer>
         </InputContainer>
-        <SafeContainer>
-          <AutoComplete
-            data={filteredAdministrators}
-            defaultValue={administrator?.name}
-            onChangeText={(text: string) => {
-              setQuery(text);
-            }}
-            keyExtractor={item => String(item.name)}
-            renderItem={renderItem}
-            hideResults={hideResults}
-            placeholder="Administradora"
-            placeholderTextColor={theme.colors.secondary100}
-            keyboardShouldPersistTaps="always"
-            icon={{
-              name: 'building',
-              source: 'FontAwesome',
-              size: 20,
-            }}
-          />
-        </SafeContainer>
+        <InputContainer>
+          <SampleIcon name="building" />
+          <SelectAdministratorContainer
+            onPress={() => setVisibleModal(!visibleModal)}>
+            <AdministratorSelectTitle>
+              {administrator ? administrator.name : 'Administradora'}
+            </AdministratorSelectTitle>
+          </SelectAdministratorContainer>
+          <IconContainer onPress={() => setAdministrator(undefined)}>
+            <SampleIcon name="close" />
+          </IconContainer>
+        </InputContainer>
         <ButtonContainer>
           <ButtonTitle>Login</ButtonTitle>
         </ButtonContainer>
         <FooterContainer />
       </FormContainer>
+      <Modal
+        visible={visibleModal}
+        onRequestClose={() => setVisibleModal(false)}>
+        <ModalOverlayContainer>
+          <ModalOverlay />
+        </ModalOverlayContainer>
+        <ModalContent>
+          <ModalHeaderContainer>
+            <ModalHeaderTitle>Busque uma administradora</ModalHeaderTitle>
+          </ModalHeaderContainer>
+          <InputContainer>
+            <SampleIcon name="building" color={theme.colors.primary} />
+            <SearchInput
+              placeholder="Administradora"
+              value={query}
+              defaultValue={administrator?.name}
+              onChangeText={text => {
+                setQuery(text);
+              }}
+            />
+            <SearchInputClearIcon onPress={() => setQuery('')}>
+              <SampleIcon name="close" color={theme.colors.primary} />
+            </SearchInputClearIcon>
+          </InputContainer>
+          <ModalListContainer>
+            <EnvironmentList
+              data={filteredAdministrators}
+              renderItem={renderItem}
+              keyExtractor={(item: any) => String(item.entityCode)}
+            />
+          </ModalListContainer>
+          <ModalFooterContainer>
+            <CloseButton onPress={() => setVisibleModal(false)}>
+              <CloseButtonTitle>Fechar</CloseButtonTitle>
+            </CloseButton>
+          </ModalFooterContainer>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 };
