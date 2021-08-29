@@ -1,8 +1,7 @@
-import React, {FunctionComponent} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Splash from '../../screens/Splash';
+import React, {FunctionComponent} from 'react';
 import Signin from '../../screens/Signin';
-import Login from '../../screens/Signin/Login';
+import Splash from '../../screens/Splash';
 
 interface RootRouteScreens {
   name: string;
@@ -17,10 +16,6 @@ export const navigations: RootRouteScreens[] = [
   {
     name: 'Signin',
     component: Signin,
-  },
-  {
-    name: 'Login',
-    component: Login,
   },
 ];
 
